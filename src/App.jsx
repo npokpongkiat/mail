@@ -42,6 +42,12 @@ function TiltCard() {
     })
   }
 
+  function setShadowTransition(transition) {
+    wrapperRef.current.querySelectorAll('.shadow-wrap').forEach(el => {
+      el.style.transition = transition
+    })
+  }
+
   function handleMouseMove(e) {
     const wrapper = wrapperRef.current
     const rect = wrapper.getBoundingClientRect()
@@ -51,6 +57,8 @@ function TiltCard() {
     const cy = rect.height / 2
     const rotateY = ((x - cx) / cx) * MAX_TILT
     const rotateX = -((y - cy) / cy) * MAX_TILT
+    wrapper.style.transition = 'transform 0.08s ease-out'
+    setShadowTransition('filter 0.08s ease-out')
     wrapper.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`
     setShadow(`drop-shadow(${-rotateY * 1.5}px ${rotateX * 1.5}px 40px rgba(0,0,0,0.3))`)
     setHovering(true)
@@ -58,6 +66,8 @@ function TiltCard() {
 
   function handleMouseLeave() {
     const wrapper = wrapperRef.current
+    wrapper.style.transition = 'transform 0.42s cubic-bezier(0.22, 1, 0.36, 1)'
+    setShadowTransition('filter 0.42s cubic-bezier(0.22, 1, 0.36, 1)')
     wrapper.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
     setShadow('drop-shadow(0 20px 40px rgba(0,0,0,0.2))')
     setHovering(false)
@@ -89,56 +99,58 @@ function TiltCard() {
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
-      <div className={`flip-inner${flipped ? ' flipped' : ''}`}>
-        <div className="face front">
-          <div className="shadow-wrap">
-            <img src={envelope} alt="Airmail envelope from Nathan Pokpongkiat to Ashley Sun" />
-          </div>
-        </div>
-        <div className="face back">
-          <div className="shadow-wrap">
-            <img
-              src={envelopeFront}
-              alt="Airmail envelope back"
-              className={`back-img${isFirstReveal ? ' fade-in' : ''}${opened ? ' fade-out' : ''}`}
-            />
-            <img
-              src={envelopeOpen}
-              alt="Airmail envelope open"
-              className={`back-img open-img${opened && !expanded ? ' fade-in-open' : ''}${expanded ? ' fade-out' : ''}`}
-            />
-          </div>
-          {/* Stickers that peek out on the sides, then move onto the paper when expanded */}
-          <img
-            src={cookie}
-            alt="Cookie snack"
-            className={`sticker sticker-left${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}
-          />
-          <img
-            src={rice}
-            alt="Rice snack"
-            className={`sticker sticker-mid${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}
-          />
-          <img
-            src={tamarind}
-            alt="Tamarind snack"
-            className={`sticker sticker-right${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}
-          />
-          <div className={`paper${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}>
-            <img src={paperTexture} className="paper-texture" alt="" />
-            <div className="letter">
-              <p>Hi Ashley,</p>
-              <p>Hope you're doing well! I put together some snacks and figured I'd send some your way.</p>
-              <p>Threw in a few of my favorites — the ones I always go back to whenever I need a little pick-me-up. Nothing too crazy, just the good stuff.</p>
-
-              <p className="sign-off">I appreciate you too!<br />— Nathan</p>
+      <div className="entry-shell">
+        <div className={`flip-inner${flipped ? ' flipped' : ''}`}>
+          <div className="face front">
+            <div className="shadow-wrap">
+              <img src={envelope} alt="Airmail envelope from Nathan Pokpongkiat to Ashley Sun" />
             </div>
           </div>
-          <img
-            src={envelopeBody}
-            alt="Airmail envelope body"
-            className={`back-img body-img${opened && !expanded ? ' fade-in-open' : ''}${expanded ? ' fade-out' : ''}`}
-          />
+          <div className="face back">
+            <div className="shadow-wrap">
+              <img
+                src={envelopeFront}
+                alt="Airmail envelope back"
+                className={`back-img${isFirstReveal ? ' fade-in' : ''}${opened ? ' fade-out' : ''}`}
+              />
+              <img
+                src={envelopeOpen}
+                alt="Airmail envelope open"
+                className={`back-img open-img${opened && !expanded ? ' fade-in-open' : ''}${expanded ? ' fade-out' : ''}`}
+              />
+            </div>
+            {/* Stickers that peek out on the sides, then move onto the paper when expanded */}
+            <img
+              src={cookie}
+              alt="Cookie snack"
+              className={`sticker sticker-left${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}
+            />
+            <img
+              src={rice}
+              alt="Rice snack"
+              className={`sticker sticker-mid${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}
+            />
+            <img
+              src={tamarind}
+              alt="Tamarind snack"
+              className={`sticker sticker-right${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}
+            />
+            <div className={`paper${opened ? ' fade-in-open' : ''}${expanded ? ' expanded' : (opened && hovering ? ' peeking' : '')}`}>
+              <img src={paperTexture} className="paper-texture" alt="" />
+              <div className="letter">
+                <p>Hi Ashley,</p>
+                <p>I've been making stuff in the kitchen lately, put together some snacks and figured I'd send some your way.</p>
+                <p>Threw in some of my favorites.</p>
+
+                <p className="sign-off">I appreciate you too!<br />— Nathan</p>
+              </div>
+            </div>
+            <img
+              src={envelopeBody}
+              alt="Airmail envelope body"
+              className={`back-img body-img${opened && !expanded ? ' fade-in-open' : ''}${expanded ? ' fade-out' : ''}`}
+            />
+          </div>
         </div>
       </div>
     </div>
