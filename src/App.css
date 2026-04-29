@@ -150,7 +150,7 @@
 }
 
 .sticker-left.expanded {
-  transform: translate(40px, 280px) scale(0.75) rotate(-8deg);
+  transform: translate(-50px, 240px) scale(1.1) rotate(-8deg);
 }
 
 .sticker-mid {
@@ -164,7 +164,7 @@
 }
 
 .sticker-mid.expanded {
-  transform: translate(-10px, 310px) scale(0.75) rotate(5deg);
+  transform: translate(-40px, 270px) scale(0.94) rotate(5deg);
 }
 
 .sticker-right {
@@ -178,7 +178,7 @@
 }
 
 .sticker-right.expanded {
-  transform: translate(-115px, 295px) scale(0.75) rotate(10deg);
+  transform: translate(-50px, 255px) scale(1.7) rotate(10deg);
 }
 
 .snack-drawings {
