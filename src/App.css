@@ -124,14 +124,7 @@
   height: 180px;
   object-fit: contain;
   opacity: 0;
-  transition:
-    opacity 0.5s ease-in-out,
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    left 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    z-index 0s;
+  transition: opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s;
   filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
   z-index: 2;
   pointer-events: none;
@@ -157,60 +150,35 @@
 }
 
 .sticker-left.expanded {
-  transform: translate(-28px, 258px) scale(1.04) rotate(-8deg);
+  transform: translate(40px, 310px) scale(0.5) rotate(-8deg);
 }
 
 .sticker-mid {
   top: -10px;
   left: calc(50% - 80px);
-  width: 145px;
-  height: 145px;
   transform: rotate(6deg) translateY(110px);
-}
-
-.sticker-mid.fade-in-open:not(.expanded) {
-  transform: rotate(6deg) translateY(130px);
 }
 
 .sticker-mid.peeking {
   transform: rotate(6deg) translateY(0);
 }
 
-.sticker-mid.fade-in-open.peeking:not(.expanded) {
-  transform: rotate(6deg) translateY(60px);
-}
-
 .sticker-mid.expanded {
-  width: 180px;
-  height: 180px;
-  transform: translate(-28px, 346px) scale(0.83) rotate(5deg);
+  transform: translate(-10px, 340px) scale(0.5) rotate(5deg);
 }
 
 .sticker-right {
   top: 10px;
-  left: calc(50% + 40px);
-  width: 205px;
-  height: 205px;
+  left: calc(50% + 110px);
   transform: rotate(12deg) translateY(110px);
-}
-
-.sticker-right.fade-in-open:not(.expanded) {
-  transform: rotate(12deg) translateY(70px);
 }
 
 .sticker-right.peeking {
   transform: rotate(12deg) translateY(0);
 }
 
-.sticker-right.fade-in-open.peeking:not(.expanded) {
-  transform: rotate(12deg) translateY(0);
-}
-
 .sticker-right.expanded {
-  left: calc(50% + 110px);
-  width: 180px;
-  height: 180px;
-  transform: translate(-40px, 270px) scale(1.44) rotate(10deg);
+  transform: translate(-115px, 325px) scale(0.5) rotate(10deg);
 }
 
 .snack-drawings {
