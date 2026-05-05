@@ -54,6 +54,14 @@
   transform: rotateY(180deg);
 }
 
+.back-content {
+  position: relative;
+}
+
+.back-content.expanded {
+  animation: paperHover 3.5s ease-in-out 0.5s infinite;
+}
+
 .back-img:first-child {
   position: relative;
   display: block;
@@ -122,11 +130,19 @@
   position: absolute;
   width: 180px;
   height: 180px;
-  object-fit: contain;
   opacity: 0;
   transition: opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s;
   filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
   z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+.snack-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   pointer-events: none;
   user-select: none;
 }
@@ -137,6 +153,62 @@
 
 .sticker.expanded {
   z-index: 4;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.sticker.eaten {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+@keyframes snackDance {
+  0%   { translate: 0 0;     rotate: -4deg; }
+  30%  { translate: 0 -12px; rotate:  4deg; }
+  60%  { translate: 0 -6px;  rotate: -3deg; }
+  100% { translate: 0 0;     rotate:  2deg; }
+}
+
+.sticker.dancing {
+  animation: snackDance 0.7s ease-in-out infinite alternate;
+}
+
+.sticker-left.dancing  { animation-delay: 0s; }
+.sticker-mid.dancing   { animation-delay: 0.18s; }
+.sticker-right.dancing { animation-delay: 0.34s; }
+
+.bite-mark {
+  position: absolute;
+  width: var(--bite-size);
+  height: var(--bite-size);
+  left: var(--bite-x);
+  top: var(--bite-y);
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+.bite-mark::before,
+.bite-mark::after {
+  content: '';
+  position: absolute;
+  width: 42%;
+  height: 42%;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.bite-mark::before {
+  left: 8%;
+  top: -12%;
+}
+
+.bite-mark::after {
+  right: -10%;
+  top: 18%;
 }
 
 .sticker-left {
@@ -246,13 +318,18 @@
 .paper.expanded {
   top: 50%;
   width: 520px;
-  height: 720px;
+  height: 680px;
   transform: translate(-50%, -50%);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
   transition: opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 3;
+}
+
+@keyframes paperHover {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
 
 .flap-svg {
@@ -298,6 +375,179 @@
 .back-img.fade-in-open {
   transition: opacity 0.35s ease-in-out;
   opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .sticker {
+    width: 100px;
+    height: 100px;
+  }
+
+  .sticker-left {
+    left: calc(50% - 120px);
+    transform: rotate(-15deg) translateY(64px);
+  }
+
+  .sticker-left.peeking {
+    transform: rotate(-15deg) translateY(0);
+  }
+
+  .sticker-left.expanded {
+    transform: translate(-20px, 205px) scale(1.1) rotate(-8deg);
+  }
+
+  .sticker-mid {
+    left: calc(50% - 42px);
+    transform: rotate(6deg) translateY(64px);
+  }
+
+  .sticker-mid.peeking {
+    transform: rotate(6deg) translateY(0);
+  }
+
+  .sticker-mid.expanded {
+    transform: translate(-20px, 218px) scale(0.94) rotate(5deg);
+  }
+
+  .sticker-right {
+    left: calc(50% + 50px);
+    transform: rotate(12deg) translateY(64px);
+  }
+
+  .sticker-right.peeking {
+    transform: rotate(12deg) translateY(0);
+  }
+
+  .sticker-right.expanded {
+    transform: translate(-20px, 212px) scale(1.7) rotate(10deg);
+  }
+
+  .paper.expanded {
+    height: 440px;
+  }
+}
+
+/* ── Photo / polaroid items (page 2) ──────────────────────────────── */
+.photo-item {
+  position: absolute;
+  width: 188px;
+  height: 188px;
+  object-fit: cover;
+  background: white;
+  padding: 9px 9px 30px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.22), 0 1px 3px rgba(0,0,0,0.12);
+  border-radius: 1px;
+  opacity: 0;
+  --photo-x: 0px;
+  --photo-y: 120px;
+  --photo-rotation: 0deg;
+  --photo-scale: 0.7;
+  --extra-x: 0px;
+  --extra-y: 0px;
+  --extra-scale: 0.7;
+  transform: translate(var(--photo-x), var(--photo-y)) rotate(var(--photo-rotation)) scale(var(--photo-scale));
+  transition: opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  box-sizing: content-box;
+}
+
+.photo-item.visible  { opacity: 1; }
+.photo-item.expanded {
+  transition: opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --photo-scale: var(--extra-scale);
+}
+
+.photo-item.expanded.settled {
+  pointer-events: all;
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out, transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hidden positions start stacked at the envelope center, then fan out while peeking */
+.photo-1 {
+  top: 20px;
+  left: calc(50% - 283px);
+  --photo-x: 180px;
+  --photo-y: 112px;
+  --photo-rotation: -8deg;
+}
+.photo-2 {
+  top: -10px;
+  left: calc(50% - 163px);
+  --photo-x: 60px;
+  --photo-y: 142px;
+  --photo-rotation: -3deg;
+}
+.photo-3 {
+  top: 10px;
+  left: calc(50% - 43px);
+  --photo-x: -60px;
+  --photo-y: 122px;
+  --photo-rotation: 6deg;
+}
+.photo-4 {
+  top: 15px;
+  left: calc(50% + 77px);
+  --photo-x: -180px;
+  --photo-y: 117px;
+  --photo-rotation: -4deg;
+}
+
+/* Peek from the centered stack to the spread inside-envelope layout */
+.photo-item.peeking {
+  --photo-x: 0px;
+  --photo-y: 0px;
+}
+
+/* Expanded — fanned out, 2/3/4 pulled closer to photo 1 */
+.photo-1.expanded {
+  --photo-x: calc(-2px + var(--extra-x));
+  --photo-y: calc(228px + var(--extra-y));
+  --photo-rotation: -12deg;
+}
+.photo-2.expanded {
+  --photo-x: calc(-7px + var(--extra-x));
+  --photo-y: calc(265px + var(--extra-y));
+  --photo-rotation: -4deg;
+}
+.photo-3.expanded {
+  --photo-x: calc(-12px + var(--extra-x));
+  --photo-y: calc(242px + var(--extra-y));
+  --photo-rotation: 8deg;
+}
+.photo-4.expanded {
+  --photo-x: calc(-17px + var(--extra-x));
+  --photo-y: calc(220px + var(--extra-y));
+  --photo-rotation: -6deg;
+}
+
+@keyframes idleBounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  25% {
+    transform: translateY(-10px) rotate(-1deg);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+  50% {
+    transform: translateY(-14px) rotate(0.5deg);
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  75% {
+    transform: translateY(-6px) rotate(0.5deg);
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+  }
+}
+
+.bounce-idle {
+  animation: idleBounce 2.6s ease-in-out 1.2s infinite;
+}
+
+.bounce-idle.stopped {
+  animation: none;
 }
 
 @keyframes fadeIn {

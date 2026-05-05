@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <g transform="translate(60,60) scale(0.62) translate(-60,-60)">
+    <polygon points="60,6 74,44 114,44 82,67 95,105 60,82 25,105 38,67 6,44 46,44" fill="white"/>
+    <polygon points="60,13 73,47 110,47 80,68 92,103 60,80 28,103 40,68 10,47 47,47" fill="#7ED4F7"/>
+    <polygon points="60,22 70,50 100,50 77,66 86,95 60,78 34,95 43,66 20,50 50,50" fill="#A8E8FB" opacity="0.5"/>
+  </g>
+</svg>

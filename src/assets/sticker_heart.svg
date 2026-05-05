@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- petals -->
+  <ellipse cx="60" cy="28" rx="13" ry="22" fill="white"/>
+  <ellipse cx="60" cy="28" rx="10" ry="19" fill="#FF9ECD"/>
+  <ellipse cx="60" cy="92" rx="13" ry="22" fill="white"/>
+  <ellipse cx="60" cy="92" rx="10" ry="19" fill="#FF9ECD"/>
+  <ellipse cx="28" cy="60" rx="22" ry="13" fill="white"/>
+  <ellipse cx="28" cy="60" rx="19" ry="10" fill="#FF9ECD"/>
+  <ellipse cx="92" cy="60" rx="22" ry="13" fill="white"/>
+  <ellipse cx="92" cy="60" rx="19" ry="10" fill="#FF9ECD"/>
+  <ellipse cx="35" cy="35" rx="13" ry="22" fill="white" transform="rotate(-45 35 35)"/>
+  <ellipse cx="35" cy="35" rx="10" ry="19" fill="#FFB3D9" transform="rotate(-45 35 35)"/>
+  <ellipse cx="85" cy="35" rx="13" ry="22" fill="white" transform="rotate(45 85 35)"/>
+  <ellipse cx="85" cy="35" rx="10" ry="19" fill="#FFB3D9" transform="rotate(45 85 35)"/>
+  <ellipse cx="35" cy="85" rx="13" ry="22" fill="white" transform="rotate(45 35 85)"/>
+  <ellipse cx="35" cy="85" rx="10" ry="19" fill="#FFB3D9" transform="rotate(45 35 85)"/>
+  <ellipse cx="85" cy="85" rx="13" ry="22" fill="white" transform="rotate(-45 85 85)"/>
+  <ellipse cx="85" cy="85" rx="10" ry="19" fill="#FFB3D9" transform="rotate(-45 85 85)"/>
+  <!-- center -->
+  <circle cx="60" cy="60" r="18" fill="white"/>
+  <circle cx="60" cy="60" r="15" fill="#FFD93D"/>
+  <circle cx="55" cy="56" r="3" fill="#E8B800" opacity="0.6"/>
+</svg>
